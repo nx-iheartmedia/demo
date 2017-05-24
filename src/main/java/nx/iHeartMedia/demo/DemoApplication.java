@@ -16,7 +16,6 @@ import io.swagger.annotations.ApiOperation;
 		org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
 		org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration.class})
 public class DemoApplication {
-
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
 	}

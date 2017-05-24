@@ -12,11 +12,16 @@ public class Advertiser {
     @GeneratedValue
     public UUID id;
 
+    @Column(nullable = false)
     public String name;
 
+    @Column(nullable = false)
     public String primary_contact;
 
+    @Column(nullable = false)
     public double credit_limit;
+
+    Advertiser() {}
 
     public Advertiser(UUID id, String name, String primaryContact, double creditLimit) {
         this.id = id;
