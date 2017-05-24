@@ -1,12 +1,18 @@
 package nx.iHeartMedia.demo;
 
+import java.util.UUID;
+import javax.persistence.*;
 /**
  * Created by Nx on 5/23/2017.
  */
 public class Advertiser {
-    public String Name;
+ //   @Id
+ //   @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
-    public String PrimaryContact;
+    private String Name;
 
-    public double CreditLimit;
+    private String PrimaryContact;
+
+    private double CreditLimit;
 }
