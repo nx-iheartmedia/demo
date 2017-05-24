@@ -3,6 +3,7 @@ package nx.iHeartMedia.demo;
 import java.util.UUID;
 import javax.persistence.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.*;
 
 /**
  * Created by Nx on 5/24/2017.
@@ -36,7 +37,14 @@ public class AdvertiserController {
     }
 
     @RequestMapping(value="/{id}/validateTransaction", method=RequestMethod.POST, headers="Content-Type=application/json")
-    public Object validateTransaction(@PathVariable UUID id, @RequestParam("credit") double credit) {
-        return true;
+    public ResponseEntity<?> validateTransaction(@PathVariable UUID id, @RequestParam("credit") double credit) {
+        Advertiser advertiser = this.getAdvertiser(id);
+        if(advertiser == null)
+            return new ResponseEntity<Object>( false, HttpStatus.NOT_FOUND /* this should return something other than 404 */);
+
+        if((advertiser.credit_limit - advertiser.credit_balance) >= credit)
+            return new ResponseEntity<Object>( true, HttpStatus.OK);
+
+        return new ResponseEntity<Object>( false, HttpStatus.OK);
     }
 }

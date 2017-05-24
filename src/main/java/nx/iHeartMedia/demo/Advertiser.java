@@ -21,12 +21,16 @@ public class Advertiser {
     @Column(nullable = false)
     public double credit_limit;
 
+    @Column(nullable = false)
+    public double credit_balance = 0d;
+
     Advertiser() {}
 
-    public Advertiser(UUID id, String name, String primaryContact, double creditLimit) {
+    public Advertiser(UUID id, String name, String primaryContact, double creditLimit, double creditBalance) {
         this.id = id;
         this.name = name;
         this.primary_contact = primaryContact;
         this.credit_limit = creditLimit;
+        this.credit_balance = creditBalance;
     }
 }
