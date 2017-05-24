@@ -45,6 +45,7 @@ dependencies {
 	compile('io.springfox:springfox-swagger2:2.7.0')
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
 	compile('org.springframework:spring-core')
+	compile('org.springframework.data:spring-data-commons')
 	compile('org.springframework:spring-jdbc')
 	compile('org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final')
 	compile('com.h2database:h2')
